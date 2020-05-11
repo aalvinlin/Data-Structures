@@ -34,7 +34,7 @@ class LinkedList:
             while current_node.next_node:
                 current_node = current_node.get_next()
 
-            current_node.set_next(value)
+            current_node.set_next(new_node)
 
     def remove_from_head(self):
 

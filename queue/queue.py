@@ -15,16 +15,77 @@ Stretch: What if you could only use instances of your Stack class to implement t
 
 from singly_linked_list import LinkedList
 
-class Queue:
+class QueueFromArray:
     def __init__(self):
         self.size = 0
-        # self.storage = ?
+        self.storage = []
     
     def __len__(self):
-        pass
+        return self.size
 
     def enqueue(self, value):
-        pass
+        self.storage.append(value)
+        self.size += 1
 
     def dequeue(self):
-        pass
+        
+        if (self.size > 0):
+
+            first_in_line = self.storage[0]
+
+            self.storage = self.storage[1:]
+            self.size -= 1
+
+            return first_in_line
+
+
+class QueueFromLinkedList:
+    def __init__(self):
+        self.size = 0
+        self.storage = LinkedList()
+    
+    def __len__(self):
+        return self.size
+    
+    # new values will be added at tail end of linked list
+    def enqueue(self, value):
+        self.storage.add_to_end(value)
+        self.size += 1
+
+    def dequeue(self):
+        
+        if (self.size > 0):
+            self.size -= 1
+            return self.storage.remove_from_head()
+
+
+# class Queue(QueueFromArray):
+class Queue(QueueFromLinkedList):
+# class Queue(QueueFromStack):
+    def __init__(self):
+        super().__init__()
+
+test = QueueFromArray()
+# test.enqueue(2)
+# test.enqueue(4)
+# test.enqueue(6)
+# test.enqueue(8)
+# test.enqueue(10)
+# test.enqueue(12)
+# test.enqueue(14)
+# test.enqueue(16)
+# test.enqueue(18)
+
+# test.enqueue(100)
+# test.enqueue(101)
+# test.enqueue(105)
+# print(len(test))
+# test.dequeue()
+# print(len(test))
+# test.dequeue()
+# print(len(test))
+# test.dequeue()
+# print(len(test))
+# test.dequeue()
+# print(len(test))
+# test.dequeue()
