@@ -14,6 +14,7 @@ Stretch: What if you could only use instances of your Stack class to implement t
 """
 
 from singly_linked_list import LinkedList
+from stack import Stack
 
 class QueueFromArray:
     def __init__(self):
@@ -58,10 +59,23 @@ class QueueFromLinkedList:
             self.size -= 1
             return self.storage.remove_from_head()
 
+class QueueFromStack:
+    def __init__(self):
+        self.size = 0
+        self.storage = Stack()
+
+    def __len__(self):
+        return self.size
+
+    def enqueue(self, value):
+        pass
+
+    def dequeue(self):
+        pass
 
 # class Queue(QueueFromArray):
-class Queue(QueueFromLinkedList):
-# class Queue(QueueFromStack):
+# class Queue(QueueFromLinkedList):
+class Queue(QueueFromStack):
     def __init__(self):
         super().__init__()
 
