@@ -59,6 +59,9 @@ class QueueFromLinkedList:
             self.size -= 1
             return self.storage.remove_from_head()
 
+# use nested stacks. Every stack will contain 2 elements: the value and a stack of everything else.
+# this way, "everything else" can be removed with one single operation
+# one stack will be needed for every element in the queue
 class QueueFromStack:
     def __init__(self):
         self.size = 0
@@ -68,10 +71,23 @@ class QueueFromStack:
         return self.size
 
     def enqueue(self, value):
+
+        next_stack = Stack()
+        next_stack.push(value)
+
+        self.storage.push(next_stack)
         pass
 
     def dequeue(self):
-        pass
+
+        all_other_items = self.storage.pop()
+        first_in_line = self.storage.pop()
+
+        self.size -= 1
+
+        self.storage = all_other_items
+
+        return first_in_line
 
 # class Queue(QueueFromArray):
 # class Queue(QueueFromLinkedList):
