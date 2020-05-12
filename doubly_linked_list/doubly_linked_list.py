@@ -76,6 +76,9 @@ class DoublyLinkedList:
         # reassign the prev pointer of the old head
         new_head.next.prev = self.head
 
+        # reassign pointer to new head
+        self.head = new_head
+
         # increment length by 1
         self.length += 1
 
@@ -216,10 +219,12 @@ test.add_to_tail(2)
 test.add_to_tail(3)
 test.add_to_tail(4)
 test.add_to_tail(5)
-test.remove_from_tail()
+# test.remove_from_tail()
 test.add_to_head(10)
 test.add_to_head(9)
 test.add_to_head(8)
 test.add_to_head(7)
 test.add_to_head(6)
+test.add_to_tail(500)
+test.add_to_head(200)
 print(test)
