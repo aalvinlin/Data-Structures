@@ -61,15 +61,16 @@ class DoublyLinkedList:
         # increment length by 1
         self.length += 1
 
-        pass
-
     """Removes the List's current head node, making the
     current head's next node the new head of the List.
     Returns the value of the removed Node."""
     def remove_from_head(self):
 
+        # store current head value
+        removed_value = self.head
+
         # move the current head pointer
-        self.hed = self.head.next
+        self.head = self.head.next
 
         # set the second element's prev pointer to None
         self.head.prev = None
@@ -77,19 +78,50 @@ class DoublyLinkedList:
         # decrease length of list by one
         self.length -= 1
 
-        pass
+        return removed_value
 
     """Wraps the given value in a ListNode and inserts it 
     as the new tail of the list. Don't forget to handle 
     the old tail node's next pointer accordingly."""
     def add_to_tail(self, value):
-        pass
+        
+        # wrap given value in a ListNode
+        new_tail = ListNode(value)
+
+        # find current tail
+        current_node = self.head
+
+        while current_node.next.next:
+            current_node = current_node.next
+
+        # add pointer to new ListNode
+        current_node.next = new_tail
+
+        # set prev pointer to old tail
+        current_node.next.prev = current_node
+
+        # increment length by 1
+        self.length += 1
 
     """Removes the List's current tail node, making the 
     current tail's previous node the new tail of the List.
     Returns the value of the removed Node."""
     def remove_from_tail(self):
-        pass
+        
+        # store current tail value
+        removed_value = self.tail
+
+        # move the current tail pointer
+        self.tail = self.tail.prev
+
+        # set the second element's prev pointer to None
+        self.tail.next = None
+
+        # decrease length of list by one
+        self.length -= 1
+
+        return removed_value
+
 
     """Removes the input node from its current spot in the 
     List and inserts it as the new head node of the List."""
