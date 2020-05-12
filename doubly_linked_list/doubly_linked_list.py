@@ -44,6 +44,18 @@ class DoublyLinkedList:
     def __len__(self):
         return self.length
 
+    def __str__(self):
+
+        output = []
+        current_node = self.head
+        
+        while current_node:
+            output.append(str(current_node.value))
+            current_node = current_node.next
+        
+        return ", ".join(output)
+
+
     """Wraps the given value in a ListNode and inserts it 
     as the new head of the list. Don't forget to handle 
     the old head node's previous pointer accordingly."""
@@ -51,6 +63,12 @@ class DoublyLinkedList:
 
         # wrap given value in a ListNode
         new_head = ListNode(value)
+
+        # if current DLL is empty, set head and tail to the new value
+        if not self.head:
+            self.head = new_tail
+            self.tail = new_tail
+            return
 
         # point new ListNode to existing head
         new_head.next = self.head
@@ -65,6 +83,10 @@ class DoublyLinkedList:
     current head's next node the new head of the List.
     Returns the value of the removed Node."""
     def remove_from_head(self):
+
+        # prevent trying to remove from an empty DLL
+        if not self.head:
+            return None
 
         # store current head value
         removed_value = self.head
@@ -88,10 +110,16 @@ class DoublyLinkedList:
         # wrap given value in a ListNode
         new_tail = ListNode(value)
 
+        # if current DLL is empty, set head and tail to the new value
+        if not self.head:
+            self.head = new_tail
+            self.tail = new_tail
+            return
+
         # find current tail
         current_node = self.head
 
-        while current_node.next.next:
+        while current_node.next:
             current_node = current_node.next
 
         # add pointer to new ListNode
@@ -108,6 +136,10 @@ class DoublyLinkedList:
     Returns the value of the removed Node."""
     def remove_from_tail(self):
         
+        # prevent trying to remove from an empty DLL
+        if not self.head or not self.tail:
+            return None
+
         # store current tail value
         removed_value = self.tail
 
@@ -174,3 +206,20 @@ class DoublyLinkedList:
                 current_max = current_node.value
 
         return current_max
+
+test = DoublyLinkedList()
+test.remove_from_head()
+test.remove_from_tail()
+
+test.add_to_tail(1)
+test.add_to_tail(2)
+test.add_to_tail(3)
+test.add_to_tail(4)
+test.add_to_tail(5)
+test.remove_from_tail()
+test.add_to_head(10)
+test.add_to_head(9)
+test.add_to_head(8)
+test.add_to_head(7)
+test.add_to_head(6)
+print(test)
