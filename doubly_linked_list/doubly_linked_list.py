@@ -66,8 +66,8 @@ class DoublyLinkedList:
 
         # if current DLL is empty, set head and tail to the new value
         if not self.head:
-            self.head = new_tail
-            self.tail = new_tail
+            self.head = new_head
+            self.tail = new_head
             return
 
         # point new ListNode to existing head
@@ -130,6 +130,7 @@ class DoublyLinkedList:
 
         # set prev pointer to old tail
         current_node.next.prev = current_node
+        self.tail = current_node
 
         # increment length by 1
         self.length += 1
@@ -141,7 +142,7 @@ class DoublyLinkedList:
         
         # prevent trying to remove from an empty DLL
         if not self.head or not self.tail:
-            return None
+            return
 
         # store current tail value
         removed_value = self.tail
@@ -219,7 +220,8 @@ test.add_to_tail(2)
 test.add_to_tail(3)
 test.add_to_tail(4)
 test.add_to_tail(5)
-# test.remove_from_tail()
+print(test, "after adding 5 elements to the tail")
+print("where is the tail?", print(test.tail))
 test.add_to_head(10)
 test.add_to_head(9)
 test.add_to_head(8)
@@ -227,4 +229,7 @@ test.add_to_head(7)
 test.add_to_head(6)
 test.add_to_tail(500)
 test.add_to_head(200)
-print(test)
+
+test.remove_from_tail()
+
+print(test, "is the final list")

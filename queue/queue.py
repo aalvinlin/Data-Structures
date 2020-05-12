@@ -94,8 +94,8 @@ class QueueFromStack:
         return first_in_line
 
 # class Queue(QueueFromArray):
-# class Queue(QueueFromLinkedList):
-class Queue(QueueFromStack):
+class Queue(QueueFromLinkedList):
+# class Queue(QueueFromStack):
     def __init__(self):
         super().__init__()
 

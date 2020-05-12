@@ -55,8 +55,8 @@ class StackFromLinkedList:
             self.size -= 1
             return self.storage.remove_from_head()
 
-# class Stack(StackFromArray):
-class Stack(StackFromLinkedList):
+class Stack(StackFromArray):
+# class Stack(StackFromLinkedList):
     def __init__(self):
         super().__init__()
 
