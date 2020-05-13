@@ -1,3 +1,6 @@
+from queue import QueueFromLinkedList as Queue
+from stack import StackFromLinkedList as Stack
+
 """
 Binary search trees are a data structure that enforce an ordering over 
 the data they store. That ordering in turn makes it a lot more efficient 
@@ -75,17 +78,58 @@ class BinarySearchTree:
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self, node):
-        pass
 
+        if self.left:
+            self.left.in_order_print(self.left)
+        
+        print(node.value)
+
+        if self.right:
+            self.right.in_order_print(self.right)
+        
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self, node):
-        pass
+
+        # hold all nodes in order
+        queue = Queue()
+
+        # add current node
+        queue.enqueue(node)
+
+        while len(queue) > 0:
+
+            next_in_line = queue.dequeue()
+            print(next_in_line.value)
+
+            if next_in_line.left:
+                queue.enqueue(next_in_line.left)
+            
+            if next_in_line.right:
+                queue.enqueue(next_in_line.right)
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self, node):
-        pass
+        
+        # hold all nodes in the order they were accessed
+        stack = Stack()
+
+        # add curren tnode
+        stack.push(node)
+
+        while len(stack) > 0:
+
+            last_added = stack.pop()
+            print(last_added.value)
+
+            # go in ascending order by pushing the right branch first
+            if last_added.right:
+                stack.push(last_added.right)
+              
+            if last_added.left:
+                stack.push(last_added.left)
+
 
     # Stretch Goals -------------------------
     # Note: Research may be required
@@ -98,14 +142,18 @@ class BinarySearchTree:
     def post_order_dft(self, node):
         pass
 
-# tree = BinarySearchTree(15)
-# tree.insert(10)
-# tree.insert(12)
-# tree.insert(22)
-# tree.insert(19)
-# tree.insert(55)
+tree = BinarySearchTree(15)
+tree.insert(10)
+tree.insert(12)
+tree.insert(22)
+tree.insert(19)
+tree.insert(55)
 
 # print("contains 18?", tree.contains(18))
 # print("contains 19?", tree.contains(19))
 # print("max is", tree.get_max())
 # tree.for_each(print)
+
+# tree.in_order_print(tree)t
+# tree.bft_print(tree)
+tree.dft_print(tree)
