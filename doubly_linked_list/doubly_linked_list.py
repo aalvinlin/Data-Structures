@@ -94,12 +94,14 @@ class DoublyLinkedList:
         if not self.head:
             return None
 
-        # if DLL length is 1, return a single node with none ???
+        # if DLL length is 1, return the single node's value
         elif self.length == 1:
+            value_to_return = self.head.value
+
             self.head = None
             self.tail = None
             self.length -= 1
-            return
+            return value_to_return
 
         # store current head value
         removed_value = self.head
@@ -156,12 +158,14 @@ class DoublyLinkedList:
         if not self.head or not self.tail:
             return
         
-        # if DLL length is 1, return a single node with none ???
+        # if DLL length is 1, return the single node's value
         elif self.length == 1:
+            value_to_return = self.head.value
+
             self.head = None
             self.tail = None
             self.length -= 1
-            return
+            return value_to_return
 
         # store current tail value
         removed_value = self.tail
@@ -185,8 +189,6 @@ class DoublyLinkedList:
         # do nothing if there is only one element in the list
         if self.length == 1:
             return
-
-        print("can node be deleted?", node)
 
         # delete and rewire prev and next pointers
         node.delete()
@@ -213,8 +215,6 @@ class DoublyLinkedList:
         if self.length == 1:
             return
 
-        print("can node be deleted?", node)
-
         # delete and rewire prev and next pointers
         node.delete()
 
@@ -235,12 +235,6 @@ class DoublyLinkedList:
     """Removes a node from the list and handles cases where
     the node was the head or the tail"""
     def delete(self, node):
-
-        print("what is about to be deleted?", node.prev, node, node.next, self, self.length)
-
-        # if not node:
-        #     print("??????????????????????????????????????????????????????")
-        #     return
 
         if not node.prev:
             self.remove_from_head()
