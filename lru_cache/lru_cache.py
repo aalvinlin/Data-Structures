@@ -1,3 +1,5 @@
+from doubly_linked_list import DoublyLinkedList
+
 class LRUCache:
     """
     Our LRUCache class keeps track of the max number of nodes it
@@ -7,7 +9,9 @@ class LRUCache:
     to every node stored in the cache.
     """
     def __init__(self, limit=10):
-        pass
+        self.cache = DoublyLinkedList()
+        self.cache_dictionary = dict()
+        self.limit = 10
 
     """
     Retrieves the value associated with the given key. Also
@@ -17,7 +21,18 @@ class LRUCache:
     key-value pair doesn't exist in the cache.
     """
     def get(self, key):
-        pass
+        
+        dll_node = self.cache_dictionary(key)
+
+        # key not in dictionary
+        if not dll_node:
+            return None
+        
+        # move value to end of list
+        # return the requested value
+        else:
+            self.cache.move_to_end(dll_node)
+            return dll_node.value
 
     """
     Adds the given key-value pair to the cache. The newly-
@@ -30,4 +45,27 @@ class LRUCache:
     the newly-specified value.
     """
     def set(self, key, value):
-        pass
+
+        # if the key exists in the cache, update the old entry
+        if self.cache_dictionary[key]:
+
+            # update existing value in dll_node
+            existing_node = self.cache_dictionary[key]
+            existing_node.value = value
+            
+            # point to the updated, most-recently-used value
+            self.cache.move_to_end(existing_node)
+
+        # key doesn't exist in the cache yet
+        else:
+
+            # if the cache is full, remove the least recently used value
+            if len(self.cache) == self.limit:
+                self.cache.remove_from_head()
+
+            # now that there is a space for the value to go, add it to the most-recently-used spot (tail end)
+            # add value to cache. It will be the most recently used value
+            self.cache.add_to_tail(value)
+
+            # add the new key to the dictionary.
+            self.cache_dictionary[key] = self.cache.add_to_tail
