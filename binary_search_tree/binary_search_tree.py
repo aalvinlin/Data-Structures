@@ -1,4 +1,4 @@
-from queue import QueueFromLinkedList as Queue
+from queue import QueueFromArray as Queue
 from stack import StackFromLinkedList as Stack
 
 """
@@ -136,24 +136,50 @@ class BinarySearchTree:
 
     # Print Pre-order recursive DFT
     def pre_order_dft(self, node):
-        pass
+
+        print(node.value)
+
+        if node.left:
+            self.pre_order_dft(node.left)
+
+        if node.right:
+            self.pre_order_dft(node.right)
 
     # Print Post-order recursive DFT
     def post_order_dft(self, node):
-        pass
 
-tree = BinarySearchTree(15)
-tree.insert(10)
-tree.insert(12)
-tree.insert(22)
-tree.insert(19)
-tree.insert(55)
+        if node.left:
+            self.post_order_dft(node.left)
+
+        if node.right:
+            self.post_order_dft(node.right)
+
+        print(node.value)
+
+# tree = BinarySearchTree(15)
+# tree.insert(10)
+# tree.insert(12)
+# tree.insert(22)
+# tree.insert(19)
+# tree.insert(55)
 
 # print("contains 18?", tree.contains(18))
 # print("contains 19?", tree.contains(19))
 # print("max is", tree.get_max())
 # tree.for_each(print)
 
-# tree.in_order_print(tree)t
+# tree.in_order_print(tree)
 # tree.bft_print(tree)
-tree.dft_print(tree)
+# tree.dft_print(tree)
+# tree.pre_order_dft(tree)
+
+# test2 = BinarySearchTree(1)
+# test2.insert(8)
+# test2.insert(5)
+# test2.insert(7)
+# test2.insert(6)
+# test2.insert(3)
+# test2.insert(4)
+# test2.insert(2)
+
+# test2.bft_print(test2)
