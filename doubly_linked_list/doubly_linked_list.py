@@ -56,7 +56,7 @@ class DoublyLinkedList:
             output.append(f"prev: {current_node.prev} <- {current_node.value} -> next: {current_node.next}")
             current_node = current_node.next
         
-        return "\n".join(output)
+        return "\n" + "\n".join(output) + "\n"
 
 
     """Wraps the given value in a ListNode and inserts it 
@@ -66,6 +66,9 @@ class DoublyLinkedList:
 
         # wrap given value in a ListNode
         new_head = ListNode(value)
+
+        # increment length by 1
+        self.length += 1
 
         # if current DLL is empty, set head and tail to the new value
         if not self.head:
@@ -82,9 +85,6 @@ class DoublyLinkedList:
         # reassign pointer to new head
         self.head = new_head
 
-        # increment length by 1
-        self.length += 1
-
     """Removes the List's current head node, making the
     current head's next node the new head of the List.
     Returns the value of the removed Node."""
@@ -93,6 +93,13 @@ class DoublyLinkedList:
         # prevent trying to remove from an empty DLL
         if not self.head:
             return None
+
+        # if DLL length is 1, return a single node with none ???
+        elif self.length == 1:
+            self.head = None
+            self.tail = None
+            self.length -= 1
+            return
 
         # store current head value
         removed_value = self.head
@@ -116,6 +123,9 @@ class DoublyLinkedList:
         # wrap given value in a ListNode
         new_tail = ListNode(value)
 
+        # increment length by 1
+        self.length += 1
+
         # if current DLL is empty, set head and tail to the new value
         if not self.head:
             self.head = new_tail
@@ -128,15 +138,17 @@ class DoublyLinkedList:
         while current_node.next:
             current_node = current_node.next
 
+        # print("list right now:", self)
+        print(current_node, "should be the tail node when adding", value)
+
         # add pointer to new ListNode
         current_node.next = new_tail
 
         # set prev pointer to old tail
         current_node.next.prev = current_node
-        self.tail = current_node
 
-        # increment length by 1
-        self.length += 1
+        # update tail pointer
+        self.tail = current_node.next
 
     """Removes the List's current tail node, making the 
     current tail's previous node the new tail of the List.
@@ -146,9 +158,19 @@ class DoublyLinkedList:
         # prevent trying to remove from an empty DLL
         if not self.head or not self.tail:
             return
+        
+        # if DLL length is 1, return a single node with none ???
+        elif self.length == 1:
+            self.head = None
+            self.tail = None
+            self.length -= 1
+            return
 
         # store current tail value
         removed_value = self.tail
+
+        print(self)
+        print(self.tail, "will be removed. before removal, length is", self.length)
 
         # move the current tail pointer
         self.tail = self.tail.prev
@@ -158,6 +180,9 @@ class DoublyLinkedList:
 
         # decrease length of list by one
         self.length -= 1
+
+        print("tail was removed!")
+        print(self)
 
         return removed_value
 
@@ -193,9 +218,9 @@ class DoublyLinkedList:
     def delete(self, node):
 
         if not node.prev:
-            self.remove_from_head(node)
+            self.remove_from_head()
         elif not node.tail:
-            self.remove_from_tail(node)
+            self.remove_from_tail()
         else:
             node.delete()
             self.length -= 1
@@ -214,32 +239,39 @@ class DoublyLinkedList:
 
         return current_max
 
-test = DoublyLinkedList()
-test.remove_from_head()
-test.remove_from_tail()
+# test = DoublyLinkedList()
+# print("1. how long is the LL?", len(test))
 
-test.add_to_tail(1)
-test.add_to_tail(2)
-test.add_to_tail(3)
-test.add_to_tail(4)
-test.add_to_tail(5)
-print(test)
+# test.remove_from_head()
+# test.remove_from_tail()
+# print("2. how long is the LL?", len(test))
 
-print("======================")
+# test.add_to_tail("zero")
+# test.add_to_tail(1)
+# test.add_to_tail(2)
+# print(test)
+# print("3. how long is the LL?", len(test))
+# print("======================")
 
-print("where is the head?", str(test), print(test.head))
-print("where is the tail?", test.tail)
+# test.add_to_head(100)
+# test.add_to_head(200)
 
+# print(test)
+# print("4. how long is the LL?", len(test))
+# print("======================")
 
-test.add_to_head(10)
-test.add_to_head(9)
-test.add_to_head(8)
-test.add_to_head(7)
-test.add_to_head(6)
-test.add_to_tail(500)
-test.add_to_head(200)
+# test.remove_from_tail()
 
-test.remove_from_tail()
+# print(test)
+# print("5. how long is the LL?", len(test))
+# print("===========")
 
-print("===========")
-print(test)
+# test.remove_from_head()
+
+# print(test)
+# print("6. how long is the LL?", len(test))
+# print("===========")
+
+# print(test.head)
+# print(test.tail)
+# print("7. how long is the LL?", len(test))
