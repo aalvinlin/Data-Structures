@@ -32,6 +32,9 @@ class ListNode:
         if self.next:
             self.next.prev = self.prev
 
+    def __str__(self):
+        return str(self.value)
+
 
 """Our doubly-linked list class. It holds references to
 the list's head and tail nodes."""
@@ -50,10 +53,10 @@ class DoublyLinkedList:
         current_node = self.head
         
         while current_node:
-            output.append(str(current_node.value))
+            output.append(f"prev: {current_node.prev} <- {current_node.value} -> next: {current_node.next}")
             current_node = current_node.next
         
-        return ", ".join(output)
+        return "\n".join(output)
 
 
     """Wraps the given value in a ListNode and inserts it 
@@ -220,8 +223,14 @@ test.add_to_tail(2)
 test.add_to_tail(3)
 test.add_to_tail(4)
 test.add_to_tail(5)
-print(test, "after adding 5 elements to the tail")
-print("where is the tail?", print(test.tail))
+print(test)
+
+print("======================")
+
+print("where is the head?", str(test), print(test.head))
+print("where is the tail?", test.tail)
+
+
 test.add_to_head(10)
 test.add_to_head(9)
 test.add_to_head(8)
@@ -232,4 +241,5 @@ test.add_to_head(200)
 
 test.remove_from_tail()
 
-print(test, "is the final list")
+print("===========")
+print(test)
