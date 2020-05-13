@@ -53,7 +53,7 @@ class DoublyLinkedList:
         current_node = self.head
         
         while current_node:
-            output.append(f"prev: {current_node.prev} <- {current_node.value} -> next: {current_node.next}")
+            output.append(f"{current_node.prev} <- {current_node.value} -> {current_node.next}")
             current_node = current_node.next
         
         return "\n" + "\n".join(output) + "\n"
@@ -138,9 +138,6 @@ class DoublyLinkedList:
         while current_node.next:
             current_node = current_node.next
 
-        # print("list right now:", self)
-        print(current_node, "should be the tail node when adding", value)
-
         # add pointer to new ListNode
         current_node.next = new_tail
 
@@ -169,9 +166,6 @@ class DoublyLinkedList:
         # store current tail value
         removed_value = self.tail
 
-        print(self)
-        print(self.tail, "will be removed. before removal, length is", self.length)
-
         # move the current tail pointer
         self.tail = self.tail.prev
 
@@ -181,41 +175,73 @@ class DoublyLinkedList:
         # decrease length of list by one
         self.length -= 1
 
-        print("tail was removed!")
-        print(self)
-
         return removed_value
 
 
     """Removes the input node from its current spot in the 
     List and inserts it as the new head node of the List."""
     def move_to_front(self, node):
-        
-        # store a reference to this node
-        node_to_move = node
+
+        # do nothing if there is only one element in the list
+        if self.length == 1:
+            return
+
+        print("can node be deleted?", node)
 
         # delete and rewire prev and next pointers
         node.delete()
 
-        # add as new head
-        self.add_to_head(node_to_move)
+        # if this node happened to be the tail, move to the previous element
+        if not node.tail:
+            self.tail = node.prev
+
+        # update head pointer
+        self.head.prev = node
+
+        # reassign as head of list
+        node.next = self.head
+        node.prev = None
+        
+        # update head pointer
+        self.head = node
 
     """Removes the input node from its current spot in the 
     List and inserts it as the new tail node of the List."""
     def move_to_end(self, node):
 
-        # store a reference to this node
-        node_to_move = node
+        # do nothing if there is only one element in the list
+        if self.length == 1:
+            return
+
+        print("can node be deleted?", node)
 
         # delete and rewire prev and next pointers
         node.delete()
 
-        # add as new tail
-        self.add_to_tail(node_to_move)
+        # if this node happened to be the head, move to the next element
+        if not node.prev:
+            self.head = node.next
+
+        # update tail pointer to point to new element
+        self.tail.next = node
+
+        # reassign as tail of list
+        node.prev = self.tail
+        node.next = None
+
+        # update tail pointer
+        self.tail = node
 
     """Removes a node from the list and handles cases where
     the node was the head or the tail"""
     def delete(self, node):
+
+        print("what is about to be deleted?", node)
+
+        if not node:
+            return
+
+        self.length -= 1
 
         if not node.prev:
             self.remove_from_head()
@@ -223,7 +249,6 @@ class DoublyLinkedList:
             self.remove_from_tail()
         else:
             node.delete()
-            self.length -= 1
         
     """Returns the highest value currently in the list"""
     def get_max(self):
@@ -275,3 +300,32 @@ class DoublyLinkedList:
 # print(test.head)
 # print(test.tail)
 # print("7. how long is the LL?", len(test))
+
+# test = DoublyLinkedList()
+# test.add_to_head(1)
+# test.add_to_tail(3)
+# test.add_to_tail(2)
+
+# print(test)
+
+# test.move_to_end(test.head.next)
+
+# print(test)
+
+
+# test = DoublyLinkedList()
+# test.add_to_head(40)
+# test.add_to_tail(5)
+# test.add_to_tail(1)
+
+# print(test)
+
+# test.move_to_end(test.head)
+
+# print("after moving to end", test)
+# print("new length:", len(test))
+
+test = DoublyLinkedList()
+test.add_to_head(40)
+test.add_to_tail(5)
+test.add_to_tail(1)
