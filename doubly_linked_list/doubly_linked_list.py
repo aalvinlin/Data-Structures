@@ -192,7 +192,7 @@ class DoublyLinkedList:
         node.delete()
 
         # if this node happened to be the tail, move to the previous element
-        if not node.tail:
+        if not node.next:
             self.tail = node.prev
 
         # update head pointer
