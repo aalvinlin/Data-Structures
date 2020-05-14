@@ -71,10 +71,11 @@ class LRUCache:
             self.cache.add_to_tail(value)
 
             # add the new key to the dictionary.
-            self.cache_dictionary[key] = self.cache.add_to_tail
+            self.cache_dictionary[key] = self.cache.tail
 
-cache = LRUCache(10)
-print(cache)
-cache.set('item1', 'a')
-cache.set('item2', 'b')
-print(cache)
+# cache = LRUCache(10)
+# print(cache, "\n==================\n")
+# cache.set('item1', 'a')
+# cache.set('item2', 'b')
+# cache.set('item2', 'c')
+# print(cache)
