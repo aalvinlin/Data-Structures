@@ -27,14 +27,14 @@ class LRUCache:
 
         # key not in dictionary
         if key not in self.cache_dictionary:
-            return
+            return None
         
         # move value to end of list
         # return the requested value
         else:
             existing_node = self.cache_dictionary[key]
             self.cache.move_to_end(existing_node)
-            return existing_node.value
+            return existing_node.value[key]
 
     """
     Adds the given key-value pair to the cache. The newly-
@@ -53,7 +53,10 @@ class LRUCache:
 
             # update existing value in existing_node
             existing_node = self.cache_dictionary[key]
-            existing_node.value = value
+
+            data = dict()
+            data[key] = value
+            existing_node.value = data
             
             # point to the updated, most-recently-used value
             self.cache.move_to_end(existing_node)
@@ -61,16 +64,22 @@ class LRUCache:
         # key doesn't exist in the cache yet
         else:
 
+            print("about to add new key!", key, value)
             print("storage:", len(self.cache), self.limit)
 
-            # if the cache is full, remove the least recently used value
+            # if the cache is full, remove the least recently used value from the cache
+            # also remove the key from the dictionary
             if len(self.cache) == self.limit:
+
                 self.cache.remove_from_head()
-                print("too full!")
+                # del self.cache_dictionary[key]
+                print("too full!", self.cache_dictionary)
 
             # now that there is a space for the value to go, add it to the most-recently-used spot (tail end)
             # add value to cache. It will be the most recently used value
-            self.cache.add_to_tail(value)
+            data = dict()
+            data[key] = value
+            self.cache.add_to_tail(data)
 
             # add the new key to the dictionary.
             self.cache_dictionary[key] = self.cache.tail

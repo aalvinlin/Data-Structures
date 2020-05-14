@@ -24,7 +24,7 @@ class CacheTests(unittest.TestCase):
         self.assertEqual(self.cache.get('item1'), 'a')
         self.cache.set('item4', 'd')
 
-        print(self.cache)
+        print("...........................", self.cache.cache_dictionary)
 
         self.assertEqual(self.cache.get('item1'), 'a')
         self.assertEqual(self.cache.get('item3'), 'c')
