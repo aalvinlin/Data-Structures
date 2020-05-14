@@ -24,16 +24,15 @@ class LRUCache:
     key-value pair doesn't exist in the cache.
     """
     def get(self, key):
-        
-        existing_node = self.cache_dictionary[key]
 
         # key not in dictionary
-        if not existing_node:
-            return None
+        if key not in self.cache_dictionary:
+            return
         
         # move value to end of list
         # return the requested value
         else:
+            existing_node = self.cache_dictionary[key]
             self.cache.move_to_end(existing_node)
             return existing_node.value
 
