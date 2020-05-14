@@ -13,6 +13,9 @@ class LRUCache:
         self.cache_dictionary = dict()
         self.limit = 10
 
+    def __str__(self):
+        return "cache: " + str(self.cache) + "\ndictionary: " + str(self.cache_dictionary)
+
     """
     Retrieves the value associated with the given key. Also
     needs to move the key-value pair to the end of the order
@@ -22,7 +25,7 @@ class LRUCache:
     """
     def get(self, key):
         
-        dll_node = self.cache_dictionary(key)
+        dll_node = self.cache_dictionary[key]
 
         # key not in dictionary
         if not dll_node:
@@ -47,7 +50,7 @@ class LRUCache:
     def set(self, key, value):
 
         # if the key exists in the cache, update the old entry
-        if self.cache_dictionary[key]:
+        if key in self.cache_dictionary:
 
             # update existing value in dll_node
             existing_node = self.cache_dictionary[key]
@@ -69,3 +72,9 @@ class LRUCache:
 
             # add the new key to the dictionary.
             self.cache_dictionary[key] = self.cache.add_to_tail
+
+cache = LRUCache(10)
+print(cache)
+cache.set('item1', 'a')
+cache.set('item2', 'b')
+print(cache)
