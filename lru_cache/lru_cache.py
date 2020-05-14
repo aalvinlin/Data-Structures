@@ -11,7 +11,7 @@ class LRUCache:
     def __init__(self, limit=10):
         self.cache = DoublyLinkedList()
         self.cache_dictionary = dict()
-        self.limit = 10
+        self.limit = limit
 
     def __str__(self):
         return "cache: " + str(self.cache) + "\ndictionary: " + str(self.cache_dictionary)
@@ -61,9 +61,12 @@ class LRUCache:
         # key doesn't exist in the cache yet
         else:
 
+            print("storage:", len(self.cache), self.limit)
+
             # if the cache is full, remove the least recently used value
             if len(self.cache) == self.limit:
                 self.cache.remove_from_head()
+                print("too full!")
 
             # now that there is a space for the value to go, add it to the most-recently-used spot (tail end)
             # add value to cache. It will be the most recently used value
