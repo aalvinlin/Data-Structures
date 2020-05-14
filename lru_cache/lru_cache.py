@@ -64,16 +64,14 @@ class LRUCache:
         # key doesn't exist in the cache yet
         else:
 
-            print("about to add new key!", key, value)
-            print("storage:", len(self.cache), self.limit)
-
             # if the cache is full, remove the least recently used value from the cache
             # also remove the key from the dictionary
             if len(self.cache) == self.limit:
 
-                self.cache.remove_from_head()
-                # del self.cache_dictionary[key]
-                print("too full!", self.cache_dictionary)
+                data_to_remove = self.cache.remove_from_head().value
+                key_to_remove = [*data_to_remove][0]
+                
+                del self.cache_dictionary[key_to_remove]
 
             # now that there is a space for the value to go, add it to the most-recently-used spot (tail end)
             # add value to cache. It will be the most recently used value
