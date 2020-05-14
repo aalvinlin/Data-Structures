@@ -186,7 +186,7 @@ class DoublyLinkedList:
     List and inserts it as the new head node of the List."""
     def move_to_front(self, node):
 
-        # do nothing if there is only one element in the list or node is already the head
+        # do nothing if there is only one element in the list
         if self.length == 1 or node is self.head:
             return
 
@@ -211,7 +211,7 @@ class DoublyLinkedList:
     List and inserts it as the new tail node of the List."""
     def move_to_end(self, node):
 
-        # do nothing if there is only one element in the list or node is already the tail
+        # do nothing if there is only one element in the list or if tail is already at the end
         if self.length == 1 or node is self.tail:
             return
 

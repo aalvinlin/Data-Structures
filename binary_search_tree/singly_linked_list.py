@@ -1,3 +1,5 @@
+# copy of Node, LinkedList classes to use with BinarySearchTree class
+
 class Node:
 
     def __init__(self, value=None, next_node=None):
@@ -44,3 +46,14 @@ class LinkedList:
             head_value = self.head.get_value()
             self.head = self.head.get_next()
             return head_value
+
+    def add_to_head(self, value):
+        
+        # wrap new value in a node
+        new_node = Node(value)
+        
+        # point to the current head of the list
+        new_node.set_next(self.head)
+        
+        # reassign pointer to head of list
+        self.head = new_node
