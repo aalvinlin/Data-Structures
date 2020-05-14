@@ -25,17 +25,17 @@ class LRUCache:
     """
     def get(self, key):
         
-        dll_node = self.cache_dictionary[key]
+        existing_node = self.cache_dictionary[key]
 
         # key not in dictionary
-        if not dll_node:
+        if not existing_node:
             return None
         
         # move value to end of list
         # return the requested value
         else:
-            self.cache.move_to_end(dll_node)
-            return dll_node.value
+            self.cache.move_to_end(existing_node)
+            return existing_node.value
 
     """
     Adds the given key-value pair to the cache. The newly-
@@ -52,7 +52,7 @@ class LRUCache:
         # if the key exists in the cache, update the old entry
         if key in self.cache_dictionary:
 
-            # update existing value in dll_node
+            # update existing value in existing_node
             existing_node = self.cache_dictionary[key]
             existing_node.value = value
             
